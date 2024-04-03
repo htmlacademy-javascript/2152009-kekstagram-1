@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
-* Студент: [Elvira Raeva](https://up.htmlacademy.ru/javascript-individual/1/user/2152009).
-* Наставник: `Неизвестно`.
+- Студент: [Elvira Raeva](https://up.htmlacademy.ru/javascript-individual/1/user/2152009).
+- Наставник: `Николай Колганов`.
 
 ---
 
