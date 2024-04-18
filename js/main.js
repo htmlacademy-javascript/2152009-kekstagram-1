@@ -44,8 +44,6 @@ const getRandomInteger = (min, max) => {
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
-
-
 function createRandomIdFromRangeGenerator (min, max) {
   const previousValues = [];
 
@@ -59,26 +57,13 @@ function createRandomIdFromRangeGenerator (min, max) {
   };
 }
 
-const SIMILAR_COMMENTS_COUNT = 3;
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 const generatePhotoId = createRandomIdFromRangeGenerator(1, SIMILAR_PHOTO_COUNT);
 const generatePhotoUrl = createRandomIdFromRangeGenerator(1, SIMILAR_PHOTO_COUNT);
-const generateCommentId = createRandomIdFromRangeGenerator(1, SIMILAR_COMMENTS_COUNT);
 
-
-const createPhotoObject = () => {
-  const generateLikes = getRandomInteger(15, 200);
-  return {
-    id: generatePhotoId(),
-    url: `photos/${generatePhotoUrl()}.jpg`,
-    description: `${getRandomArrayElement(DESCRIPTION)}`,
-    likes:generateLikes,
-    comments:[]
-  };
-};
-
-const createCommentObject = () => {
+const createCommentObject = (generateCommentId) => {
   const generateAvatarUrl = getRandomInteger(1, 6);
+
   return{
     id: generateCommentId(),
     avatar: `img/avatar-${generateAvatarUrl}.svg`,
@@ -87,10 +72,20 @@ const createCommentObject = () => {
   };
 };
 
-const similarComments = Array.from({length: SIMILAR_COMMENTS_COUNT}, createCommentObject);
+const createPhotoObject = () => {
+  const generateLikes = getRandomInteger(15, 200);
+  const SIMILAR_COMMENTS_COUNT = getRandomInteger(1, 20);
+  const generateCommentId = createRandomIdFromRangeGenerator(1, SIMILAR_COMMENTS_COUNT);
+  const similarComments = Array.from({length: SIMILAR_COMMENTS_COUNT},()=> createCommentObject(generateCommentId));
+  return {
+    id: generatePhotoId(),
+    url: `photos/${generatePhotoUrl()}.jpg`,
+    description: `${getRandomArrayElement(DESCRIPTION)}`,
+    likes:generateLikes,
+    comments:similarComments
+  };
+};
 
 const similarPhoto = Array.from({length: SIMILAR_PHOTO_COUNT}, createPhotoObject);
-
-similarPhoto.map((photo) =>photo['comments'].push(...similarComments));
 
 console.log(similarPhoto);
