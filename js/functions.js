@@ -17,7 +17,7 @@ checkPolindrom('Лёша на полке клопа нашёл '); // true
 checkPolindrom('GGGk');
 
 /*Извлечение из строки цифр */
-function extractingNumbers(str) {
+function extractNumbersFromString(str) {
   let result = '';
   const fromNumToString = str.toString();
   for (let i = 0; i <= fromNumToString.length; i++) {
@@ -27,20 +27,20 @@ function extractingNumbers(str) {
   }
   return parseInt(result.replaceAll(' ', ''), 10);
 }
-extractingNumbers('2023 год'); // 2023
-extractingNumbers('ECMAScript 2022'); // 2022
-extractingNumbers('1 кефир, 0.5 батона'); // 105
-extractingNumbers('агент 007'); // 7
-extractingNumbers('а я томат'); // NaN
-extractingNumbers(2023); // 2023
-extractingNumbers(-1); // 1
-extractingNumbers(1.5); // 15
+extractNumbersFromString('2023 год'); // 2023
+extractNumbersFromString('ECMAScript 2022'); // 2022
+extractNumbersFromString('1 кефир, 0.5 батона'); // 105
+extractNumbersFromString('агент 007'); // 7
+extractNumbersFromString('а я томат'); // NaN
+extractNumbersFromString(2023); // 2023
+extractNumbersFromString(-1); // 1
+extractNumbersFromString(1.5); // 15
 /* */
 
-function additionalCharactersFun(originalStr, strLength, additionalStr) {
+function prependString(originalStr, strLength, additionalStr) {
   let result = originalStr;
   if (originalStr.length > strLength) {
-    return console.log(originalStr);
+    return originalStr;
   }
 
   while (result.length < strLength) {
@@ -51,30 +51,29 @@ function additionalCharactersFun(originalStr, strLength, additionalStr) {
     }
   }
 
-  return console.log(result);
+  return result;
 }
 
-// Добавочный символ использован один раз
-additionalCharactersFun('1', 2, '0'); // '01'
+prependString('1', 2, '0'); // '01'
 
 // Добавочный символ использован три раза
-additionalCharactersFun('1', 4, '0'); // '0001'
+prependString('1', 4, '0'); // '0001'
 
 // Добавочные символы обрезаны с конца
-additionalCharactersFun('q', 4, 'werty'); // 'werq'
+prependString('q', 4, 'werty'); // 'werq'
 
 // Добавочные символы использованы полтора раза
-additionalCharactersFun('q', 4, 'we'); // 'wweq'
+prependString('q', 4, 'we'); // 'wweq'
 
 // Добавочные символы не использованы, исходная строка не изменена
-additionalCharactersFun('qwerty', 4, '0'); // 'qwerty'
+prependString('qwerty', 4, '0'); // 'qwerty'
 
 /* */
 
 /* */
 function validatorStr(str, strLength) {
   const result = str.length <= strLength;
-  return console.log(result);
+  return result;
 }
 
 // Cтрока короче 20 символов
