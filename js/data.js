@@ -1,5 +1,5 @@
 import {getRandomInteger,createRandomIdFromRangeGenerator,getRandomArrayElement} from './util.js';
-const DESCRIPTIONS = [
+export const DESCRIPTIONS = [
   'Золотистые лучи солнца проникают сквозь густую листву деревьев, создавая игру света и тени в таинственном лесу.',
   'На фоне утреннего неба горделиво стоит одинокий маяк, озаренный первыми лучами восходящего солнца.',
   'Серебристые волны ласкают берег, оставляя на песке игривые узоры, словно послание приближающемуся приливу.',
@@ -12,7 +12,7 @@ const DESCRIPTIONS = [
   'Мощный водопад, окутанный облаком брызг и тумана, бросает вызов окружающей природе своей неукротимой силой и величием.'
 ];
 
-const MESSAGES = [
+export const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -68,3 +68,4 @@ const createPhotoObject = () => {
 };
 
 export const similarPhoto = Array.from({length: SIMILAR_PHOTO_COUNT}, createPhotoObject);
+
