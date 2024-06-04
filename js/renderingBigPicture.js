@@ -32,7 +32,7 @@ const renderComments = (comments) => {
 const openBigPictureModal = (evt) => {
   const objectId = evt.target.parentElement.id;
   const objectById = similarPhoto.find((x) => x.id === Number(objectId));
-  if (!objectById){
+  if (typeof(objectById) === 'undefined'){
     return;
   }
 
@@ -48,15 +48,14 @@ const openBigPictureModal = (evt) => {
 
   renderComments(objectById.comments);
 };
+const closeBigPictureModal = () => {
+  bigPictureModal.classList.add('hidden');
+  document.querySelector('body').classList.remove('modal-open');
+};
 export const initBigPicture = ()=>{
   usersPhotoContainer.addEventListener('click', (evt) => {
     openBigPictureModal(evt);
   });
-
-  const closeBigPictureModal = () => {
-    bigPictureModal.classList.add('hidden');
-    document.querySelector('body').classList.remove('modal-open');
-  };
 
   canselBigPictureButton.addEventListener('click', () => {
     closeBigPictureModal();
