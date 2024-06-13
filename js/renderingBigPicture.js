@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util.js';
 import { similarPhoto } from './data.js';
-import { initComments } from './commentsBigPicture.js';
+import { refreshComments,initComments } from './commentsBigPicture.js';
 
 const bigPictureModal = document.querySelector('.big-picture');
 const usersPhotoContainer = document.querySelector('.pictures');
@@ -12,10 +12,11 @@ const canselBigPictureButton = bigPictureModal.querySelector(
 );
 const socialComments = document.querySelector('.social__comments');
 const commentsLoader = bigPictureModal.querySelector('.comments-loader');
-
+let onDocumentKeydown;
 const closeBigPictureModal = () => {
   bigPictureModal.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
+  document.removeEventListener('keydown', onDocumentKeydown);
 };
 
 const openBigPictureModal = (evt) => {
@@ -33,12 +34,14 @@ const openBigPictureModal = (evt) => {
   commentsCount.textContent = objectById.comments.length;
   bigPictureModal.querySelector('.social__caption').innerHTML =
     objectById.description;
-  initComments(objectById.comments);
-  document.addEventListener('keydown', (event) => {
+  refreshComments(objectById.comments);
+  onDocumentKeydown = (event) => {
     if (isEscapeKey(event)) {
       closeBigPictureModal();
     }
-  });
+  };
+
+  document.addEventListener('keydown', onDocumentKeydown);
 };
 
 export const initBigPicture = () => {
@@ -50,5 +53,5 @@ export const initBigPicture = () => {
     closeBigPictureModal();
   });
 
-
+  initComments();
 };

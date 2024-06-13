@@ -42,12 +42,15 @@ const loadComments = () => {
 
 };
 
-export const initComments = (comments) => {
+export const initComments = () => {
+  commentsLoader.addEventListener('click', loadComments);
+};
+
+export const refreshComments = (comments)=>{
   allComments = comments;
   renderedCommentsCount = 0;
   socialComments.innerHTML = '';
   commentsLoader.classList.remove('hidden');
   commentsLoader.removeEventListener('click', loadComments);
-  commentsLoader.addEventListener('click', loadComments);
   loadComments();
 };
