@@ -1,29 +1,53 @@
-import { renderComments } from './renderingBigPicture.js';
-const bigPictureModal = document.querySelector('.big-picture');
 
-const stepComments = 5;
-const socialCommentCount = bigPictureModal.querySelector('.social__comment-count');
+const bigPictureModal = document.querySelector('.big-picture');
+const STEP = 5;
+const socialCommentCount = bigPictureModal.querySelector(
+  '.social__comment-count'
+);
+const commentTemplate = document
+  .querySelector('#comments')
+  .content.querySelector('.social__comment');
+const commentsListFragment = document.createDocumentFragment();
+const socialComments = document.querySelector('.social__comments');
 const commentsLoader = bigPictureModal.querySelector('.comments-loader');
 
-export const renderCommentsByStep = (comments) => {
-  let renderedCommentsCount = 0;
+let allComments = [];
+let renderedCommentsCount = 0;
 
-  const loadComments = () => {
-    const remainingComments = comments.length - renderedCommentsCount;
-    const nextStep = Math.min(remainingComments, stepComments);
+const renderComments = (comments) => {
+  comments.forEach(({ avatar, message, name }) => {
+    const commentElement = commentTemplate.cloneNode(true);
+    commentElement.querySelector('.social__picture').src = avatar;
+    commentElement.querySelector('.social__picture').alt = name;
+    commentElement.querySelector('.social__text').innerHTML = message;
+    commentsListFragment.appendChild(commentElement);
+  });
+  socialComments.appendChild(commentsListFragment);
+};
 
-    renderComments(comments.slice(renderedCommentsCount, renderedCommentsCount + nextStep));
-    renderedCommentsCount += nextStep;
-    socialCommentCount.textContent = `${renderedCommentsCount} из ${comments.length} комментариев`;
 
-    if (renderedCommentsCount >= comments.length) {
-      commentsLoader.classList.add('hidden');
-      commentsLoader.removeEventListener('click', loadComments);
-    }
-  };
+const loadComments = () => {
+  const remainingComments = allComments.length - renderedCommentsCount;
+  const nextStep = Math.min(remainingComments, STEP);
 
-  loadComments();
+  renderComments(
+    allComments.slice(renderedCommentsCount, renderedCommentsCount + nextStep)
+  );
+  renderedCommentsCount += nextStep;
+  socialCommentCount.textContent = `${renderedCommentsCount} из ${allComments.length} комментариев`;
+  if (renderedCommentsCount >= allComments.length) {
+    commentsLoader.classList.add('hidden');
+    commentsLoader.removeEventListener('click', loadComments);
+  }
 
+};
+
+export const initComments = (comments) => {
+  allComments = comments;
+  renderedCommentsCount = 0;
+  socialComments.innerHTML = '';
+  commentsLoader.classList.remove('hidden');
   commentsLoader.removeEventListener('click', loadComments);
   commentsLoader.addEventListener('click', loadComments);
+  loadComments();
 };
