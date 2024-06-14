@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
+    <script src="./vendor/pristine/pristine.min.js"></script>
     <script src="./js/main.js" type="module"></script>
 
     <title>Кекстаграм</title>
@@ -59,6 +60,7 @@
               class="img-upload__form"
               id="upload-select-image"
               method="post"
+              action=" https://28.javascript.htmlacademy.pro/kekstagram"
               enctype="multipart/form-data"
               autocomplete="off"
             >
@@ -243,6 +245,8 @@
                         class="text__hashtags"
                         name="hashtags"
                         placeholder="#ХэшТег"
+                        pattern="/^(#[a-zA-ZА-ЯЁа-яё0-9]{1,19}(?:\s|$)){0,5}$/"
+                        data-pristine-message="Хэштег должен соответствовать регулярному выражению:/^(#[a-zA-ZА-ЯЁа-яё0-9]{1,19}(?:\s|$)){0,5}$/"
                       />
                     </div>
                     <div class="img-upload__field-wrapper">
@@ -250,6 +254,8 @@
                         class="text__description"
                         name="description"
                         placeholder="Ваш комментарий..."
+                        maxlength="140"
+                        data-pristine-maxlength-message="Максимум 140 символов"
                       ></textarea>
                     </div>
                   </fieldset>
