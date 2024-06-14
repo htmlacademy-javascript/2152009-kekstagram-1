@@ -245,8 +245,6 @@
                         class="text__hashtags"
                         name="hashtags"
                         placeholder="#ХэшТег"
-                        pattern="/^(#[a-zA-ZА-ЯЁа-яё0-9]{1,19}(?:\s|$)){0,5}$/"
-                        data-pristine-message="Хэштег должен соответствовать регулярному выражению:/^(#[a-zA-ZА-ЯЁа-яё0-9]{1,19}(?:\s|$)){0,5}$/"
                       />
                     </div>
                     <div class="img-upload__field-wrapper">
@@ -254,9 +252,9 @@
                         class="text__description"
                         name="description"
                         placeholder="Ваш комментарий..."
-                        maxlength="140"
                         data-pristine-maxlength-message="Максимум 140 символов"
                       ></textarea>
+
                     </div>
                   </fieldset>
 
@@ -461,16 +459,12 @@
         Загружаем...
       </div>
     </template>
-      <!-- Комментарий к фото -->
-      <template id="comments">
-        <li class="social__comment">
-          <img
-              class="social__picture"
-              src=""
-              alt=""
-              width="35" height="35">
-          <p class="social__text"></p>
+    <!-- Комментарий к фото -->
+    <template id="comments">
+      <li class="social__comment">
+        <img class="social__picture" src="" alt="" width="35" height="35" />
+        <p class="social__text"></p>
       </li>
-      </template>
+    </template>
   </body>
 </html>

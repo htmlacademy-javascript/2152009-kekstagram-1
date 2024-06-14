@@ -7,20 +7,29 @@ const canselPictureUploadButton = document.querySelector('#upload-cancel');
 const pictureUploadFormSubmit = document.querySelector('.img-upload__submit');
 const inputHashtag = document.querySelector('.text__hashtags');
 const pictureDescription = document.querySelector('.text__description');
-const pristine = new Pristine(pictureUploadForm);
+const pristine = new Pristine(pictureUploadForm,{
+  classTo: 'img-upload__text',
+  errorTextParent: 'img-upload__text',
+  errorTextTag: 'span',
+  errorTextClass: 'form__error'
+});
+
 pristine.addValidator(inputHashtag, (value) => {
   const hashtagRegex = /^(#[a-zA-ZА-ЯЁа-яё0-9]{1,19}(?:\s|$)){0,5}$/;
   const isValid = hashtagRegex.test(value.trim());
   const hashtags = value.toLowerCase().split(/\s+/);
   const uniqueHashtags = new Set(hashtags);
+
   return isValid && hashtags.length === uniqueHashtags.size;
-}, 'Хэштег должен соответствовать регулярному выражению: /^(#[a-zA-ZА-ЯЁа-яё0-9]{1,19}(?:\s|$)){0,5}$/ и быть уникальным.Допускается максимальное число хэштегов: 5');
+}, 'Хэштег должен соответствовать регулярному выражению: /^(#[a-zA-ZА-ЯЁа-яё0-9]{1,19}){0,5}$/, быть уникальным,хэштеги записываются через пробел.Допускается максимальное число хэштегов: 5');
 
 pristine.addValidator(pictureDescription, (value) => value.length <= 140, 'Максимум 140 символов');
+
 let onDocumentKeydown;
 const validatePictureForm = () => {
   pictureUploadForm.addEventListener('input', (evt) => {
     evt.preventDefault();
+
     const isValid = pristine.validate();
     pictureUploadFormSubmit.disabled = !isValid;
   });
@@ -50,16 +59,22 @@ const openPictureUploadModal = () => {
 
 pictureUploadInput.addEventListener('change', () => {
   openPictureUploadModal();
+
 });
 
 canselPictureUploadButton.addEventListener('click', () => {
   closePictureUploadModal();
 });
-pictureUploadForm.addEventListener('submit', () => {
-  validatePictureForm();
+pictureUploadForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  pristine.addError(inputHashtag,'Левая ошибка');//её тоже не отображает
+  if(pristine.validate()){
+    pictureUploadForm.submit();
+  }
 });
 
 pictureUploadForm.addEventListener('input',()=>{
   validatePictureForm();
+
 
 });
