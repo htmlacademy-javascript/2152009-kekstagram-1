@@ -29,7 +29,7 @@ let onDocumentKeydown;
 const validatePictureForm = () => {
   pictureUploadForm.addEventListener('input', (evt) => {
     evt.preventDefault();
-
+    pristine.addError(pictureUploadForm, '');
     const isValid = pristine.validate();
     pictureUploadFormSubmit.disabled = !isValid;
   });
@@ -67,7 +67,7 @@ canselPictureUploadButton.addEventListener('click', () => {
 });
 pictureUploadForm.addEventListener('submit', (event) => {
   event.preventDefault();
-  pristine.addError(inputHashtag,'Левая ошибка');//её тоже не отображает
+
   if(pristine.validate()){
     pictureUploadForm.submit();
   }
@@ -76,5 +76,6 @@ pictureUploadForm.addEventListener('submit', (event) => {
 pictureUploadForm.addEventListener('input',()=>{
   validatePictureForm();
 
+  console.log('Adding test error to inputHashtag');
 
 });
