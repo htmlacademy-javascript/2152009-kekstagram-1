@@ -6,7 +6,6 @@ const pictureUploadOverlay = document.querySelector('.img-upload__overlay');
 const pictureUploadForm = document.querySelector('.img-upload__form');
 const canselPictureUploadButton = document.querySelector('#upload-cancel');
 let onDocumentKeydown;
-import { validatePictureForm } from './pictureFormValidation.js';
 
 
 const closePictureUploadModal = () => {
@@ -15,8 +14,6 @@ const closePictureUploadModal = () => {
   pictureUploadInput.value = '';
   document.removeEventListener('keydown', onDocumentKeydown);
   canselPictureUploadButton.removeEventListener('click',closePictureUploadModal);
-  inputHashtag.removeEventListener('input', validatePictureForm);
-  pictureDescription.removeEventListener('input', validatePictureForm);
 };
 onDocumentKeydown = (event) => {
   const {activeElement} = document;
