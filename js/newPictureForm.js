@@ -1,5 +1,4 @@
 import { isEscapeKey } from './util.js';
-import {validatePictureForm} from './pictureFormValidation.js';
 const pictureUploadInput = document.querySelector('#upload-file');
 const inputHashtag = document.querySelector('.text__hashtags');
 const pictureDescription = document.querySelector('.text__description');
@@ -7,6 +6,7 @@ const pictureUploadOverlay = document.querySelector('.img-upload__overlay');
 const pictureUploadForm = document.querySelector('.img-upload__form');
 const canselPictureUploadButton = document.querySelector('#upload-cancel');
 let onDocumentKeydown;
+import { validatePictureForm } from './pictureFormValidation.js';
 
 
 const closePictureUploadModal = () => {
@@ -18,18 +18,25 @@ const closePictureUploadModal = () => {
   inputHashtag.removeEventListener('input', validatePictureForm);
   pictureDescription.removeEventListener('input', validatePictureForm);
 };
+onDocumentKeydown = (event) => {
+  const {activeElement} = document;
+  if (isEscapeKey(event) && activeElement !== inputHashtag && activeElement !== pictureDescription) {
+    closePictureUploadModal();
+    event.stopPropagation();
+  }
 
+};
 const openPictureUploadModal = () => {
   pictureUploadOverlay.classList.remove('hidden');
 
   document.querySelector('body').classList.add('modal-open');
   onDocumentKeydown = (event) => {
-    const activeElement = document.activeElement;
+    const {activeElement} = document;
     if (isEscapeKey(event) && activeElement !== inputHashtag && activeElement !== pictureDescription) {
       closePictureUploadModal();
       event.stopPropagation();
     }
-    validatePictureForm();
+
   };
 
   document.addEventListener('keydown', onDocumentKeydown);
