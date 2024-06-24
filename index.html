@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
+    <script src="./vendor/pristine/pristine.min.js"></script>
     <script src="./js/main.js" type="module"></script>
 
     <title>Кекстаграм</title>
@@ -59,6 +60,7 @@
               class="img-upload__form"
               id="upload-select-image"
               method="post"
+              action=" https://28.javascript.htmlacademy.pro/kekstagram"
               enctype="multipart/form-data"
               autocomplete="off"
             >
@@ -250,7 +252,9 @@
                         class="text__description"
                         name="description"
                         placeholder="Ваш комментарий..."
+                        data-pristine-maxlength-message="Максимум 140 символов"
                       ></textarea>
+
                     </div>
                   </fieldset>
 
@@ -455,16 +459,12 @@
         Загружаем...
       </div>
     </template>
-      <!-- Комментарий к фото -->
-      <template id="comments">
-        <li class="social__comment">
-          <img
-              class="social__picture"
-              src=""
-              alt=""
-              width="35" height="35">
-          <p class="social__text"></p>
+    <!-- Комментарий к фото -->
+    <template id="comments">
+      <li class="social__comment">
+        <img class="social__picture" src="" alt="" width="35" height="35" />
+        <p class="social__text"></p>
       </li>
-      </template>
+    </template>
   </body>
 </html>
