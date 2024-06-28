@@ -184,5 +184,4 @@ export const resetEditingEffect = () => {
   );
   effectLevelSlider.classList.add('hidden');
   imgUploadEffectLevel.classList.add('hidden');
-  imgUploadEffects.classList.add('hidden');
 };
