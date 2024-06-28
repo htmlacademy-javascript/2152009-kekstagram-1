@@ -28,5 +28,5 @@ export const initPictureEditingSize = () =>{
   });
 };
 export const resetEditingSize = ()=>{
-  pictureUploadPreview.style.transform = 'scale(100%)';
+  picture.style.transform = 'scale(100%)';
 };
