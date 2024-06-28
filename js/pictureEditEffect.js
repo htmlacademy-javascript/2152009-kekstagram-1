@@ -50,18 +50,18 @@ const EFFECT_LEVEL_OBJECT = {
 
 };
 const EFFECT_CSS = {
-  'effects__preview--chrome':'grayscale',
-  'effects__preview--sepia':'sepia',
-  'effects__preview--marvin':'invert',
-  'effects__preview--phobos':'blur',
-  'effects__preview--heat':'brightness'
+  chrome:'grayscale',
+  sepia:'sepia',
+  marvin:'invert',
+  phobos:'blur',
+  heat:'brightness'
 };
 const MEASURE = {
-  'effects__preview--chrome':'',
-  'effects__preview--sepia':'',
-  'effects__preview--marvin':'%',
-  'effects__preview--phobos':'px',
-  'effects__preview--heat':''
+  chrome:'',
+  sepia:'',
+  marvin:'%',
+  phobos:'px',
+  heat:''
 };
 const customizationEffects = (effect)=>{
   picture.classList = '';
@@ -71,10 +71,10 @@ const customizationEffects = (effect)=>{
   imgUploadEffectLevel.classList.remove('hidden');
 };
 
-const applyEffect = (value) => {
+const applyEffect = (effect,value) => {
   const currentEffect = picture.className;
-  if (currentEffect !== null){
-    picture.style.filter = `${EFFECT_CSS[currentEffect]}(${value}${MEASURE[currentEffect]})`;
+  if (currentEffect){
+    picture.style.filter = `${EFFECT_CSS[effect]}(${value}${MEASURE[effect]})`;
   }else{
     picture.style.filter = '';
   }
@@ -87,6 +87,7 @@ export const resetEditingEffect = () => {
 };
 
 export const initPictureEditEffect = () => {
+  let currentEffect = 'none';
   noUiSlider.create(effectLevelSlider, {
     range: {
       min: 0,
@@ -96,14 +97,15 @@ export const initPictureEditEffect = () => {
     start: 100,
   });
   effectLevelSlider.noUiSlider.on('update', () => {
+
     effectLevelValue.value = effectLevelSlider.noUiSlider.get();
-    applyEffect(effectLevelValue.value);
+    applyEffect(currentEffect,effectLevelValue.value);
   });
   imgUploadEffects.addEventListener('click', (evt) => {
-    const effect = evt.target.value;
+    currentEffect = evt.target.value;
     picture.className = '';
-    if (effect !== 'none'){
-      customizationEffects(effect);
+    if (currentEffect !== 'none' && currentEffect){
+      customizationEffects(currentEffect);
     }else{
       resetEditingEffect();
     }
