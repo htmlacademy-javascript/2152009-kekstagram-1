@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-
+    <link rel='stylesheet' href="./vendor/nouislider/nouislider.css"></link>
+<script src="./vendor/nouislider/nouislider.js"></script>
     <script src="./vendor/pristine/pristine.min.js"></script>
     <script src="./js/main.js" type="module"></script>
 
@@ -95,7 +96,7 @@
                       <input
                         type="text"
                         class="scale__control scale__control--value"
-                        value="55%"
+                        value="100%"
                         title="Image Scale"
                         name="scale"
                         readonly
@@ -117,15 +118,15 @@
                     </div>
 
                     <!-- Изменение глубины эффекта, накладываемого на изображение -->
-                    <fieldset class="img-upload__effect-level effect-level">
+                    <fieldset class="img-upload__effect-level effect-level hidden">
                       <input
-                        class="effect-level__value"
+                        class="effect-level__value hidden"
                         type="number"
                         step="any"
                         name="effect-level"
                         value=""
                       />
-                      <div class="effect-level__slider"></div>
+                      <div class="effect-level__slider hidden"></div>
                     </fieldset>
 
                     <!-- Кнопка для закрытия формы редактирования изображения -->

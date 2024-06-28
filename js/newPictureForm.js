@@ -1,10 +1,13 @@
 import { isEscapeKey } from './util.js';
+import {resetEditingSize} from './pictureEditingSize.js';
+import {resetEditingEffect} from './pictureEditEffect.js';
 const pictureUploadInput = document.querySelector('#upload-file');
 const inputHashtag = document.querySelector('.text__hashtags');
 const pictureDescription = document.querySelector('.text__description');
 const pictureUploadOverlay = document.querySelector('.img-upload__overlay');
 const pictureUploadForm = document.querySelector('.img-upload__form');
 const canselPictureUploadButton = document.querySelector('#upload-cancel');
+
 let onDocumentKeydown;
 
 
@@ -14,6 +17,8 @@ const closePictureUploadModal = () => {
   pictureUploadInput.value = '';
   document.removeEventListener('keydown', onDocumentKeydown);
   canselPictureUploadButton.removeEventListener('click',closePictureUploadModal);
+  resetEditingSize();
+  resetEditingEffect();
 };
 onDocumentKeydown = (event) => {
   const {activeElement} = document;
