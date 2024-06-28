@@ -74,9 +74,9 @@ const applyEffect = (effect,value) => {
   const currentEffect = picture.className;
   if (currentEffect){
     picture.style.filter = `${EFFECT_CSS[effect]}(${value}${MEASURE[effect]})`;
-  }else{
-    picture.style.filter = '';
+
   }
+
 };
 export const resetEditingEffect = () => {
   picture.className = '';
