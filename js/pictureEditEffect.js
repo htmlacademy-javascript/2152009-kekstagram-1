@@ -64,7 +64,6 @@ const MEASURE = {
   heat:''
 };
 const customizationEffects = (effect)=>{
-  picture.classList = '';
   picture.classList.add(`effects__preview--${effect}`);
   effectLevelSlider.noUiSlider.updateOptions(EFFECT_LEVEL_OBJECT[effect]);
   effectLevelSlider.classList.remove('hidden');
@@ -101,14 +100,15 @@ export const initPictureEditEffect = () => {
     effectLevelValue.value = effectLevelSlider.noUiSlider.get();
     applyEffect(currentEffect,effectLevelValue.value);
   });
-  imgUploadEffects.addEventListener('click', (evt) => {
+  imgUploadEffects.addEventListener('change', (evt) => {
     currentEffect = evt.target.value;
-    picture.className = '';
-    if (currentEffect !== 'none' && currentEffect){
-      customizationEffects(currentEffect);
-    }else{
+    if (currentEffect === 'none'){
       resetEditingEffect();
+
+      return;
     }
+    customizationEffects(currentEffect);
+
   });
 };
 
