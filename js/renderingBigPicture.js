@@ -1,5 +1,5 @@
 import { isEscapeKey } from './util.js';
-import { similarPhoto } from './data.js';
+import { receivedPicturesData } from './main.js';
 import { refreshComments,initComments } from './commentsBigPicture.js';
 
 const bigPictureModal = document.querySelector('.big-picture');
@@ -20,28 +20,32 @@ const closeBigPictureModal = () => {
 };
 
 const openBigPictureModal = (evt) => {
-  const objectId = evt.target.parentElement.id;
-  const objectById = similarPhoto.find((x) => x.id === Number(objectId));
-  if (objectById === undefined) {
-    return;
-  }
-  socialComments.innerHTML = '';
-  commentsLoader.classList.remove('hidden');
-  bigPictureModal.classList.remove('hidden');
-  document.querySelector('body').classList.add('modal-open');
-  pictureUrl.querySelector('img').src = objectById.url;
-  likesCount.textContent = objectById.likes;
-  commentsCount.textContent = objectById.comments.length;
-  bigPictureModal.querySelector('.social__caption').innerHTML =
-    objectById.description;
-  refreshComments(objectById.comments);
-  onDocumentKeydown = (event) => {
-    if (isEscapeKey(event)) {
-      closeBigPictureModal();
-    }
-  };
 
-  document.addEventListener('keydown', onDocumentKeydown);
+  if (evt.target.className === 'picture__img'){
+    const objectId = evt.target.parentElement.id;
+    const objectById = receivedPicturesData.find((x) => x.id === Number(objectId));
+    if (objectById === undefined) {
+      return;
+    }
+    socialComments.innerHTML = '';
+    commentsLoader.classList.remove('hidden');
+    bigPictureModal.classList.remove('hidden');
+    document.querySelector('body').classList.add('modal-open');
+    pictureUrl.querySelector('img').src = objectById.url;
+    likesCount.textContent = objectById.likes;
+    commentsCount.textContent = objectById.comments.length;
+    bigPictureModal.querySelector('.social__caption').innerHTML =
+      objectById.description;
+    refreshComments(objectById.comments);
+    onDocumentKeydown = (event) => {
+      if (isEscapeKey(event)) {
+        closeBigPictureModal();
+      }
+    };
+
+    document.addEventListener('keydown', onDocumentKeydown);
+  }
+
 };
 
 export const initBigPicture = () => {
