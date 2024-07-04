@@ -13,7 +13,7 @@ export const renderPhotoUsers = (similarPhotoUsers) => {
     photoElement.querySelector('.picture__img').src = url;
     photoElement.querySelector('.picture__likes').innerHTML = likes;
     photoElement.querySelector('.picture__comments').innerHTML = comments.length;
-    photoElement.setAttribute('id',`${id}`);
+    photoElement.setAttribute('data-thumbnails-id',`${id}`);
     usersPhotoListFragment.appendChild(photoElement);
   });
 

@@ -1,7 +1,6 @@
 import { isEscapeKey } from './util.js';
-import { receivedPicturesData } from './main.js';
 import { refreshComments,initComments } from './commentsBigPicture.js';
-
+import { renderPhotoUsers } from './renderingThumbnails.js';
 const bigPictureModal = document.querySelector('.big-picture');
 const usersPhotoContainer = document.querySelector('.pictures');
 const pictureUrl = bigPictureModal.querySelector('.big-picture__img');
@@ -13,16 +12,23 @@ const canselBigPictureButton = bigPictureModal.querySelector(
 const socialComments = document.querySelector('.social__comments');
 const commentsLoader = bigPictureModal.querySelector('.comments-loader');
 let onDocumentKeydown;
+let receivedPicturesData;
 const closeBigPictureModal = () => {
   bigPictureModal.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
+
+export const initRenderingThumbnails = (data) => {
+  receivedPicturesData = data;
+  renderPhotoUsers(data);
+};
 const openBigPictureModal = (evt) => {
 
-  if (evt.target.className === 'picture__img'){
-    const objectId = evt.target.parentElement.id;
+  if (evt.target.closest('[data-thumbnails-id]')){
+    const pictureElement = evt.target.closest('.picture');
+    const objectId = pictureElement.getAttribute('data-thumbnails-id');
     const objectById = receivedPicturesData.find((x) => x.id === Number(objectId));
     if (objectById === undefined) {
       return;
