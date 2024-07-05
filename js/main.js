@@ -9,9 +9,7 @@ import { showAlert } from './util.js';
 
 
 getData()
-  .then((similarPhoto) => {
-    initRenderingThumbnails(similarPhoto);
-  })
+  .then(initRenderingThumbnails)
   .catch(
     (err) => {
       showAlert(err.message);

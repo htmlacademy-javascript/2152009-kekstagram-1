@@ -17,6 +17,8 @@ export const closePictureUploadModal = () => {
   pictureUploadOverlay.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
   pictureUploadInput.value = '';
+  inputHashtag.value = '';
+  pictureDescription.value = '';
   document.removeEventListener('keydown', onDocumentKeydown);
   canсelPictureUploadButton.removeEventListener(
     'click',

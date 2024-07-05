@@ -52,10 +52,8 @@ export const renderMessage = (messageType) => {
     }
   }
 
-  if (cancelButton) {
-    cancelButton.addEventListener('click', removeMessage);
-  }
 
+  cancelButton?.addEventListener('click', removeMessage);
   document.addEventListener('keydown', onKeydownRemoveMessage);
   window.addEventListener('click', onClickRemoveMessage);
 };
