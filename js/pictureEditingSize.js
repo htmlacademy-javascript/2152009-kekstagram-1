@@ -29,4 +29,6 @@ export const initPictureEditingSize = () =>{
 };
 export const resetEditingSize = ()=>{
   picture.style.transform = 'scale(100%)';
+  scaleControlValue.value = '100%';
+
 };

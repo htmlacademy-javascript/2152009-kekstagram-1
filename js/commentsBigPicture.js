@@ -51,6 +51,5 @@ export const refreshComments = (comments)=>{
   renderedCommentsCount = 0;
   socialComments.innerHTML = '';
   commentsLoader.classList.remove('hidden');
-  commentsLoader.removeEventListener('click', loadComments);
   loadComments();
 };

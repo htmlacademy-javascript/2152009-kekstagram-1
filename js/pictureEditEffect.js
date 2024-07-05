@@ -81,6 +81,7 @@ const applyEffect = (effect,value) => {
 export const resetEditingEffect = () => {
   picture.className = '';
   picture.style.filter = '';
+  imgUploadEffects.querySelector('[value=none]').checked = true;
   effectLevelSlider.classList.add('hidden');
   imgUploadEffectLevel.classList.add('hidden');
 };
