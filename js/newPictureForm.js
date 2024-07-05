@@ -8,7 +8,7 @@ const inputHashtag = document.querySelector('.text__hashtags');
 const pictureDescription = document.querySelector('.text__description');
 const pictureUploadOverlay = document.querySelector('.img-upload__overlay');
 const pictureUploadForm = document.querySelector('.img-upload');
-const canсelPictureUploadButton = document.querySelector('#upload-cancel');
+const cancelPictureUploadButton = document.querySelector('#upload-cancel');
 
 let onDocumentKeydown;
 
@@ -20,7 +20,7 @@ export const closePictureUploadModal = () => {
   inputHashtag.value = '';
   pictureDescription.value = '';
   document.removeEventListener('keydown', onDocumentKeydown);
-  canсelPictureUploadButton.removeEventListener(
+  cancelPictureUploadButton.removeEventListener(
     'click',
     closePictureUploadModal
   );
@@ -61,13 +61,13 @@ export const newPictureForm = () => {
     openPictureUploadModal();
   });
 
-  canсelPictureUploadButton.addEventListener('click', () => {
+  cancelPictureUploadButton.addEventListener('click', () => {
     closePictureUploadModal();
   });
 };
 const blockSubmitButton = () => {
-  canсelPictureUploadButton.disabled = true;
-  canсelPictureUploadButton.textContent = SubmitButtonText.SENDING;
+  cancelPictureUploadButton.disabled = true;
+  cancelPictureUploadButton.textContent = SubmitButtonText.SENDING;
 };
 
 const unblockSubmitButton = () => {
