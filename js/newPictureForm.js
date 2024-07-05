@@ -71,8 +71,8 @@ const blockSubmitButton = () => {
 };
 
 const unblockSubmitButton = () => {
-  canсelPictureUploadButton.disabled = false;
-  canсelPictureUploadButton.textContent = SubmitButtonText.IDLE;
+  cancelPictureUploadButton.disabled = false;
+  cancelPictureUploadButton.textContent = SubmitButtonText.IDLE;
 };
 export const setUserFormSubmit = (onSuccess) => {
   pictureUploadForm.addEventListener('submit', (event) => {
