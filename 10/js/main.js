@@ -1,5 +1,5 @@
-import {renderPhotoUsers} from './renderingThumbnails.js';
-import {initBigPicture} from './renderingBigPicture.js';
+
+import {initBigPicture,initRenderingThumbnails} from './renderingBigPicture.js';
 import {newPictureForm,setUserFormSubmit,closePictureUploadModal} from './newPictureForm.js';
 import { initPictureFormValidation } from './pictureFormValidation.js';
 import {initPictureEditingSize} from './pictureEditingSize.js';
@@ -7,12 +7,9 @@ import {initPictureEditEffect} from './pictureEditEffect.js';
 import {getData} from './api.js';
 import { showAlert } from './util.js';
 
-export let receivedPicturesData;
+
 getData()
-  .then((similarPhoto) => {
-    receivedPicturesData = similarPhoto;
-    renderPhotoUsers(similarPhoto);
-  })
+  .then(initRenderingThumbnails)
   .catch(
     (err) => {
       showAlert(err.message);
@@ -27,3 +24,4 @@ newPictureForm();
 initPictureFormValidation();
 initPictureEditEffect();
 initPictureEditingSize();
+

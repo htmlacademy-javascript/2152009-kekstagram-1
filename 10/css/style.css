@@ -1410,6 +1410,17 @@ main {
 }
 .form__error {
   display: block;
-  font-size: 0.85em;
+  font-size: 14px;
   color: #c00;
+  margin-bottom: 15px;
+}
+.alertContainerError{
+  z-index: 100;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  font-size: 13px;
+  text-align: center;
+  background-color: #FD4D4C;
 }
