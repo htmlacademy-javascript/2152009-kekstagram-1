@@ -1,9 +1,11 @@
-import { renderPhotoUsers } from './renderingThumbnails.js';
+import { renderPhotoUsers } from './rendering-thumbnails.js';
+import { debounce } from './util.js';
 const defaultFilterButton = document.querySelector('#filter-default');
 const randomFilterButton = document.querySelector('#filter-random');
 const discussedFilterButton = document.querySelector('#filter-discussed');
 const picturesContainer = document.querySelector('.pictures');
 const PICTURE_COUNT = 10;
+const RERENDER_DELAY = 500;
 let receivedPicturesData;
 const renderPictures = (pictures)=>{
   renderPhotoUsers(pictures);
@@ -47,18 +49,24 @@ export const defaultPictureFilter = (data)=>{
   renderPictures(receivedPicturesData);
 };
 
-defaultFilterButton.addEventListener('click',()=>{
+
+const debouncedDefaultFilter = debounce(() => {
   initFilterButtons();
   defaultFilterButton.classList.add('img-filters__button--active');
   defaultPictureFilter(receivedPicturesData);
-});
-randomFilterButton.addEventListener('click',()=>{
+}, RERENDER_DELAY);
+
+const debouncedRandomFilter = debounce(() => {
   initFilterButtons();
   randomFilterButton.classList.add('img-filters__button--active');
   randomPictureFilter(receivedPicturesData);
-});
-discussedFilterButton.addEventListener('click',()=>{
+}, RERENDER_DELAY);
+
+const debouncedDiscussedFilter = debounce(() => {
   initFilterButtons();
   discussedFilterButton.classList.add('img-filters__button--active');
   discussedPictureFilter(receivedPicturesData);
-});
+}, RERENDER_DELAY);
+defaultFilterButton.addEventListener('click', debouncedDefaultFilter);
+randomFilterButton.addEventListener('click', debouncedRandomFilter);
+discussedFilterButton.addEventListener('click', debouncedDiscussedFilter);

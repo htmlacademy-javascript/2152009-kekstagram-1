@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util.js';
-import { refreshComments,initComments } from './commentsBigPicture.js';
-import { defaultPictureFilter } from './filtersForPictures.js';
+import { refreshComments,initComments } from './comments-big-picture.js';
+import { defaultPictureFilter } from './filters-for-pictures.js';
 const bigPictureModal = document.querySelector('.big-picture');
 const usersPhotoContainer = document.querySelector('.pictures');
 const pictureUrl = bigPictureModal.querySelector('.big-picture__img');

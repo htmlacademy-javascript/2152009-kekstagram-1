@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util.js';
-import { resetEditingSize } from './pictureEditingSize.js';
-import { resetEditingEffect } from './pictureEditEffect.js';
+import { resetEditingSize } from './picture-editing-size.js';
+import { resetEditingEffect } from './picture-edit-effect.js';
 import { sendData } from './api.js';
 import { renderMessage,SubmitButtonText } from './util.js';
 const pictureUploadInput = document.querySelector('#upload-file');
