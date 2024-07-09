@@ -9,8 +9,8 @@ const renderPictures = (pictures)=>{
   renderPhotoUsers(pictures);
 };
 const getRandomInteger = () => {
-  const lower = Math.ceil(Math.min(0, receivedPicturesData.length));
-  const upper = Math.floor(Math.max(0, receivedPicturesData.length));
+  const lower = Math.ceil(Math.min(0, receivedPicturesData.length - 1));
+  const upper = Math.floor(Math.max(0, receivedPicturesData.length - 1));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
@@ -33,7 +33,7 @@ const initFilterButtons = ()=>{
 };
 
 const randomPictureFilter = (data)=>{
-  const randomPictures = getRandomUniquePictures(data, PICTURE_COUNT);
+  const randomPictures = getRandomUniquePictures([...data], PICTURE_COUNT);
   renderPictures(randomPictures);
 
 };
@@ -43,7 +43,6 @@ const discussedPictureFilter = (data)=>{
 
 };
 export const defaultPictureFilter = (data)=>{
-  initFilterButtons();
   receivedPicturesData = data;
   renderPictures(receivedPicturesData);
 };
