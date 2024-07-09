@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util.js';
 import { refreshComments,initComments } from './commentsBigPicture.js';
-import { renderPhotoUsers } from './renderingThumbnails.js';
+import { defaultPictureFilter } from './filtersForPictures.js';
 const bigPictureModal = document.querySelector('.big-picture');
 const usersPhotoContainer = document.querySelector('.pictures');
 const pictureUrl = bigPictureModal.querySelector('.big-picture__img');
@@ -18,11 +18,12 @@ const closeBigPictureModal = () => {
   document.querySelector('body').classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
 };
-
-
+const imgFilters = document.querySelector('.img-filters');
 export const initRenderingThumbnails = (data) => {
   receivedPicturesData = data;
-  renderPhotoUsers(data);
+  defaultPictureFilter(data);
+  imgFilters.classList.remove('img-filters--inactive');
+
 };
 const openBigPictureModal = (evt) => {
 
