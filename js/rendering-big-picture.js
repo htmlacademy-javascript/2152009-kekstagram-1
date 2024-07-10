@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util.js';
-import { refreshComments,initComments } from './comments-big-picture.js';
-import { defaultPictureFilter } from './filters-for-pictures.js';
+import { refreshComments, initComments } from './comments-big-picture.js';
+import { initPictures } from './filters-for-pictures.js';
 const bigPictureModal = document.querySelector('.big-picture');
 const usersPhotoContainer = document.querySelector('.pictures');
 const pictureUrl = bigPictureModal.querySelector('.big-picture__img');
@@ -21,16 +21,16 @@ const closeBigPictureModal = () => {
 const imgFilters = document.querySelector('.img-filters');
 export const initRenderingThumbnails = (data) => {
   receivedPicturesData = data;
-  defaultPictureFilter(data);
+  initPictures(data);
   imgFilters.classList.remove('img-filters--inactive');
-
 };
 const openBigPictureModal = (evt) => {
-
-  if (evt.target.closest('[data-thumbnails-id]')){
+  if (evt.target.closest('[data-thumbnails-id]')) {
     const pictureElement = evt.target.closest('.picture');
     const objectId = pictureElement.getAttribute('data-thumbnails-id');
-    const objectById = receivedPicturesData.find((x) => x.id === Number(objectId));
+    const objectById = receivedPicturesData.find(
+      (x) => x.id === Number(objectId)
+    );
     if (objectById === undefined) {
       return;
     }
@@ -52,7 +52,6 @@ const openBigPictureModal = (evt) => {
 
     document.addEventListener('keydown', onDocumentKeydown);
   }
-
 };
 
 export const initBigPicture = () => {
