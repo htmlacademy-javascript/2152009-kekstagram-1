@@ -1,6 +1,4 @@
-
 const bigPictureModal = document.querySelector('.big-picture');
-const STEP = 5;
 const socialCommentCount = bigPictureModal.querySelector(
   '.social__comment-count'
 );
@@ -11,6 +9,7 @@ const commentsListFragment = document.createDocumentFragment();
 const socialComments = document.querySelector('.social__comments');
 const commentsLoader = bigPictureModal.querySelector('.comments-loader');
 
+const STEP = 5;
 let allComments = [];
 let renderedCommentsCount = 0;
 

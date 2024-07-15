@@ -24,9 +24,9 @@ export const initRenderingThumbnails = (data) => {
   initPictures(data);
   imgFilters.classList.remove('img-filters--inactive');
 };
-const openBigPictureModal = (evt) => {
-  if (evt.target.closest('[data-thumbnails-id]')) {
-    const pictureElement = evt.target.closest('.picture');
+const openBigPictureModal = (eventClickPhoto) => {
+  if (eventClickPhoto.target.closest('[data-thumbnails-id]')) {
+    const pictureElement = eventClickPhoto.target.closest('.picture');
     const objectId = pictureElement.getAttribute('data-thumbnails-id');
     const objectById = receivedPicturesData.find(
       (x) => x.id === Number(objectId)
@@ -44,8 +44,8 @@ const openBigPictureModal = (evt) => {
     bigPictureModal.querySelector('.social__caption').innerHTML =
       objectById.description;
     refreshComments(objectById.comments);
-    onDocumentKeydown = (event) => {
-      if (isEscapeKey(event)) {
+    onDocumentKeydown = (evt) => {
+      if (isEscapeKey(evt)) {
         closeBigPictureModal();
       }
     };

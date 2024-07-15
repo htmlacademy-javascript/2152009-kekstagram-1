@@ -6,13 +6,13 @@ const discussedFilterButton = document.querySelector('#filter-discussed');
 const picturesContainer = document.querySelector('.pictures');
 const PICTURE_COUNT = 10;
 const RERENDER_DELAY = 500;
-let receivedPicturesData;
 const FILTER_BUTTONS = [
   defaultFilterButton,
   randomFilterButton,
   discussedFilterButton,
 ];
 
+let receivedPicturesData;
 const getRandomInteger = () => {
   const lower = Math.ceil(Math.min(0, receivedPicturesData.length - 1));
   const upper = Math.floor(Math.max(0, receivedPicturesData.length - 1));
