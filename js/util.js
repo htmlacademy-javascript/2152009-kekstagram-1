@@ -8,6 +8,10 @@ const alertContainerError = document.querySelector('#alertContainerError').conte
 const MessageFragment = document.createDocumentFragment();
 const alertContainerFragment = document.createDocumentFragment();
 const ALERT_SHOW_TIME = 5000;
+export const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...',
+};
 export const showAlert = (message) => {
   const alertElement = alertContainerError.cloneNode(true);
   alertElement.querySelector('.alertContainerErrorMessage').innerHTML = message;
@@ -40,14 +44,14 @@ export const renderMessage = (messageType) => {
     }
   };
 
-  function onKeydownRemoveMessage(event){
-    if (isEscapeKey(event)) {
+  function onKeydownRemoveMessage(evt){
+    if (isEscapeKey(evt)) {
       removeMessage();
     }
   }
 
-  function onClickRemoveMessage (event) {
-    if (!elementMessage.contains(event.target)) {
+  function onClickRemoveMessage (evt) {
+    if (!elementMessage.contains(evt.target)) {
       removeMessage();
     }
   }
@@ -57,10 +61,7 @@ export const renderMessage = (messageType) => {
   document.addEventListener('keydown', onKeydownRemoveMessage);
   window.addEventListener('click', onClickRemoveMessage);
 };
-export const SubmitButtonText = {
-  IDLE: 'Опубликовать',
-  SENDING: 'Публикую...',
-};
+
 export const debounce = (callback, timeoutDelay) =>{
   let timeoutId;
 

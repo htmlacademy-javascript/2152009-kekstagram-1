@@ -2,18 +2,19 @@ import { isEscapeKey } from './util.js';
 import { resetEditingSize } from './picture-editing-size.js';
 import { resetEditingEffect } from './picture-edit-effect.js';
 import { sendData } from './api.js';
-import { renderMessage,SubmitButtonText } from './util.js';
+import { renderMessage, SubmitButtonText } from './util.js';
 const pictureUploadInput = document.querySelector('#upload-file');
 const inputHashtag = document.querySelector('.text__hashtags');
 const pictureDescription = document.querySelector('.text__description');
 const pictureUploadOverlay = document.querySelector('.img-upload__overlay');
 const pictureUploadForm = document.querySelector('.img-upload');
 const cancelPictureUploadButton = document.querySelector('#upload-cancel');
-const pictureUploardPreview = document.querySelector('.img-upload__preview').querySelector('img');
+const pictureUploardPreview = document
+  .querySelector('.img-upload__preview')
+  .querySelector('img');
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 let onDocumentKeydown;
-
 
 export const closePictureUploadModal = () => {
   pictureUploadOverlay.classList.add('hidden');
@@ -29,36 +30,36 @@ export const closePictureUploadModal = () => {
   resetEditingSize();
   resetEditingEffect();
 };
-onDocumentKeydown = (event) => {
+onDocumentKeydown = (evt) => {
   const { activeElement } = document;
   if (
-    isEscapeKey(event) &&
+    isEscapeKey(evt) &&
     activeElement !== inputHashtag &&
     activeElement !== pictureDescription
   ) {
     closePictureUploadModal();
-    event.stopPropagation();
+    evt.stopPropagation();
   }
 };
 const openPictureUploadModal = () => {
   pictureUploadOverlay.classList.remove('hidden');
 
   document.querySelector('body').classList.add('modal-open');
-  onDocumentKeydown = (event) => {
+  onDocumentKeydown = (evt) => {
     const { activeElement } = document;
     if (
-      isEscapeKey(event) &&
+      isEscapeKey(evt) &&
       activeElement !== inputHashtag &&
       activeElement !== pictureDescription
     ) {
       closePictureUploadModal();
-      event.stopPropagation();
+      evt.stopPropagation();
     }
   };
 
   document.addEventListener('keydown', onDocumentKeydown);
 };
-export const newPictureForm = () => {
+export const displayNewPictureForm = () => {
   pictureUploadInput.addEventListener('change', () => {
     const file = pictureUploadInput.files[0];
     const fileName = file.name.toLowerCase();
@@ -84,10 +85,10 @@ const unblockSubmitButton = () => {
   cancelPictureUploadButton.textContent = SubmitButtonText.IDLE;
 };
 export const setUserFormSubmit = (onSuccess) => {
-  pictureUploadForm.addEventListener('submit', (event) => {
-    event.preventDefault();
+  pictureUploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
     blockSubmitButton();
-    sendData(new FormData(event.target))
+    sendData(new FormData(evt.target))
       .then(onSuccess)
       .then(renderMessage('success'))
       .catch((err) => {
