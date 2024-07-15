@@ -9,6 +9,8 @@ const pictureDescription = document.querySelector('.text__description');
 const pictureUploadOverlay = document.querySelector('.img-upload__overlay');
 const pictureUploadForm = document.querySelector('.img-upload');
 const cancelPictureUploadButton = document.querySelector('#upload-cancel');
+const pictureUploardPreview = document.querySelector('.img-upload__preview').querySelector('img');
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 let onDocumentKeydown;
 
@@ -58,6 +60,13 @@ const openPictureUploadModal = () => {
 };
 export const newPictureForm = () => {
   pictureUploadInput.addEventListener('change', () => {
+    const file = pictureUploadInput.files[0];
+    const fileName = file.name.toLowerCase();
+    const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+    if (matches) {
+      pictureUploardPreview.src = URL.createObjectURL(file);
+    }
     openPictureUploadModal();
   });
 
