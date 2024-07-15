@@ -32,54 +32,55 @@ const getRandomUniquePictures = (picturesData, count) => {
 
   return Array.from(uniquePictures);
 };
-const resetFilterState = () => {
+const setActiveFilter = (newActiveButton) => {
   FILTER_BUTTONS.forEach((elem) =>
     elem.classList.remove('img-filters__button--active')
   );
+  newActiveButton.classList.add('img-filters__button--active');
+};
+const clearPictures = ()=>{
   picturesContainer.querySelectorAll('a').forEach((elem) => elem.remove());
 };
 
 const applyRandomPictureFilter = (data) => {
+  clearPictures();
   const randomPictures = getRandomUniquePictures(data, PICTURE_COUNT);
   renderPhotoUsers(randomPictures);
 };
 const applyDiscussedPictureFilter = (data) => {
+  clearPictures();
   const sorted = [...data].sort(
     (picture1, picture2) => picture2.comments.length - picture1.comments.length
   );
   renderPhotoUsers(sorted);
 };
 const applyDefaultPictureFilter = () => {
+  clearPictures();
   renderPhotoUsers(receivedPicturesData);
 };
 
 const applyDefaultFilterDebounced = debounce(() => {
-  resetFilterState();
   applyDefaultPictureFilter(receivedPicturesData);
 }, RERENDER_DELAY);
 
 const applyRandomFilterDebounced = debounce(() => {
-  resetFilterState();
-
   applyRandomPictureFilter(receivedPicturesData);
 }, RERENDER_DELAY);
 
 const applyDiscussedFilterDebounced = debounce(() => {
-  resetFilterState();
-
   applyDiscussedPictureFilter(receivedPicturesData);
 }, RERENDER_DELAY);
 defaultFilterButton.addEventListener('click', () => {
+  setActiveFilter(defaultFilterButton);
   applyDefaultFilterDebounced();
-  defaultFilterButton.classList.add('img-filters__button--active');
 });
 randomFilterButton.addEventListener('click', () => {
+  setActiveFilter(randomFilterButton);
   applyRandomFilterDebounced();
-  randomFilterButton.classList.add('img-filters__button--active');
 });
 discussedFilterButton.addEventListener('click', () => {
+  setActiveFilter(discussedFilterButton);
   applyDiscussedFilterDebounced();
-  discussedFilterButton.classList.add('img-filters__button--active');
 });
 export const initPictures = (data) => {
   receivedPicturesData = data;
