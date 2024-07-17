@@ -3,6 +3,7 @@ import { resetEditingSize } from './picture-editing-size.js';
 import { resetEditingEffect } from './picture-edit-effect.js';
 import { sendData } from './api.js';
 import { renderMessage, SubmitButtonText } from './util.js';
+import { pristine } from './picture-form-validation.js';
 const pictureUploadInput = document.querySelector('#upload-file');
 const inputHashtag = document.querySelector('.text__hashtags');
 const pictureDescription = document.querySelector('.text__description');
@@ -20,6 +21,7 @@ export const closePictureUploadModal = () => {
   pictureUploadInput.value = '';
   inputHashtag.value = '';
   pictureDescription.value = '';
+  pristine.reset();
   document.removeEventListener('keydown', onDocumentKeydown);
   cancelPictureUploadButton.removeEventListener(
     'click',

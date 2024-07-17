@@ -18,12 +18,11 @@ const renderComments = (comments) => {
     const commentElement = commentTemplate.cloneNode(true);
     commentElement.querySelector('.social__picture').src = avatar;
     commentElement.querySelector('.social__picture').alt = name;
-    commentElement.querySelector('.social__text').innerHTML = message;
+    commentElement.querySelector('.social__text').textContent = message;
     commentsListFragment.appendChild(commentElement);
   });
   socialComments.appendChild(commentsListFragment);
 };
-
 
 const handleLoadComments = () => {
   const remainingComments = allComments.length - renderedCommentsCount;
@@ -37,14 +36,13 @@ const handleLoadComments = () => {
     commentsLoader.classList.add('hidden');
     commentsLoader.removeEventListener('click', handleLoadComments);
   }
-
 };
 
-export const initComments = () => {
+export const initializeComments = () => {
   commentsLoader.addEventListener('click', handleLoadComments);
 };
 
-export const refreshComments = (comments)=>{
+export const refreshComments = (comments) => {
   allComments = comments;
   renderedCommentsCount = 0;
   socialComments.innerHTML = '';
