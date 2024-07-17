@@ -6,7 +6,7 @@ const discussedFilterButton = document.querySelector('#filter-discussed');
 const picturesContainer = document.querySelector('.pictures');
 const PICTURE_COUNT = 10;
 const RERENDER_DELAY = 500;
-const FILTER_BUTTONS = [
+const FILTERING_BUTTONS = [
   defaultFilterButton,
   randomFilterButton,
   discussedFilterButton,
@@ -33,7 +33,7 @@ const getRandomUniquePictures = (picturesData, count) => {
   return Array.from(uniquePictures);
 };
 const setActiveFilter = (newActiveButton) => {
-  FILTER_BUTTONS.forEach((elem) =>
+  FILTERING_BUTTONS.forEach((elem) =>
     elem.classList.remove('img-filters__button--active')
   );
   newActiveButton.classList.add('img-filters__button--active');

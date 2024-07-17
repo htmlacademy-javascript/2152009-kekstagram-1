@@ -1,5 +1,5 @@
 import { isEscapeKey } from './util.js';
-import { refreshComments, initComments } from './comments-big-picture.js';
+import { refreshComments, initializeComments } from './comments-big-picture.js';
 import { initPictures } from './filters-for-pictures.js';
 const bigPictureModal = document.querySelector('.big-picture');
 const usersPhotoContainer = document.querySelector('.pictures');
@@ -41,7 +41,7 @@ const openBigPictureModal = (eventClickPhoto) => {
     pictureUrl.querySelector('img').src = objectById.url;
     likesCount.textContent = objectById.likes;
     commentsCount.textContent = objectById.comments.length;
-    bigPictureModal.querySelector('.social__caption').innerHTML =
+    bigPictureModal.querySelector('.social__caption').textContent =
       objectById.description;
     refreshComments(objectById.comments);
     onDocumentKeydown = (evt) => {
@@ -52,10 +52,10 @@ const openBigPictureModal = (eventClickPhoto) => {
 
     document.addEventListener('keydown', onDocumentKeydown);
   }
-  initComments();
+  initializeComments();
 };
 
-export const initBigPicture = () => {
+export const initializeBigPicture = () => {
   usersPhotoContainer.addEventListener('click', (evt) => {
     openBigPictureModal(evt);
   });
@@ -63,5 +63,4 @@ export const initBigPicture = () => {
   canselBigPictureButton.addEventListener('click', () => {
     closeBigPictureModal();
   });
-
 };

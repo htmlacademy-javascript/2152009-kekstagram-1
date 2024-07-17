@@ -1,13 +1,13 @@
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 const pictureUploadPreview = document.querySelector('.img-upload__preview');
-const picture = pictureUploadPreview .querySelector('img');
+const picture = pictureUploadPreview.querySelector('img');
 const imgUploadEffects = document.querySelector('.img-upload__effects');
 const effectLevelValue = document.querySelector('.effect-level__value');
 const imgUploadEffectLevel = document.querySelector(
   '.img-upload__effect-level'
 );
 const EFFECT_LEVEL_OBJECT = {
-  chrome:{
+  chrome: {
     range: {
       min: 0,
       max: 1,
@@ -15,7 +15,7 @@ const EFFECT_LEVEL_OBJECT = {
     start: 1,
     step: 0.1,
   },
-  sepia:{
+  sepia: {
     range: {
       min: 0,
       max: 1,
@@ -23,7 +23,7 @@ const EFFECT_LEVEL_OBJECT = {
     start: 1,
     step: 0.1,
   },
-  marvin:{
+  marvin: {
     range: {
       min: 0,
       max: 100,
@@ -31,7 +31,7 @@ const EFFECT_LEVEL_OBJECT = {
     start: 100,
     step: 1,
   },
-  phobos:{
+  phobos: {
     range: {
       min: 0,
       max: 3,
@@ -39,44 +39,41 @@ const EFFECT_LEVEL_OBJECT = {
     start: 3,
     step: 0.1,
   },
-  heat:{
+  heat: {
     range: {
       min: 1,
       max: 3,
     },
     start: 3,
     step: 0.1,
-  }
-
+  },
 };
 const EFFECT_CSS = {
-  chrome:'grayscale',
-  sepia:'sepia',
-  marvin:'invert',
-  phobos:'blur',
-  heat:'brightness'
+  chrome: 'grayscale',
+  sepia: 'sepia',
+  marvin: 'invert',
+  phobos: 'blur',
+  heat: 'brightness',
 };
 const MEASURE = {
-  chrome:'',
-  sepia:'',
-  marvin:'%',
-  phobos:'px',
-  heat:''
+  chrome: '',
+  sepia: '',
+  marvin: '%',
+  phobos: 'px',
+  heat: '',
 };
-const customizeEffects = (effect)=>{
+const customizeEffects = (effect) => {
   picture.classList.add(`effects__preview--${effect}`);
   effectLevelSlider.noUiSlider.updateOptions(EFFECT_LEVEL_OBJECT[effect]);
   effectLevelSlider.classList.remove('hidden');
   imgUploadEffectLevel.classList.remove('hidden');
 };
 
-const applyEffect = (effect,value) => {
+const applyEffect = (effect, value) => {
   const currentEffect = picture.className;
-  if (currentEffect){
+  if (currentEffect) {
     picture.style.filter = `${EFFECT_CSS[effect]}(${value}${MEASURE[effect]})`;
-
   }
-
 };
 export const resetEditingEffect = () => {
   picture.className = '';
@@ -86,30 +83,27 @@ export const resetEditingEffect = () => {
   imgUploadEffectLevel.classList.add('hidden');
 };
 
-export const initPictureEditEffect = () => {
+export const initializePictureEditEffect = () => {
   let currentEffect = 'none';
   noUiSlider.create(effectLevelSlider, {
     range: {
       min: 0,
       max: 100,
     },
-    connect:'lower',
+    connect: 'lower',
     start: 100,
   });
   effectLevelSlider.noUiSlider.on('update', () => {
-
     effectLevelValue.value = effectLevelSlider.noUiSlider.get();
-    applyEffect(currentEffect,effectLevelValue.value);
+    applyEffect(currentEffect, effectLevelValue.value);
   });
   imgUploadEffects.addEventListener('change', (evt) => {
     currentEffect = evt.target.value;
-    if (currentEffect === 'none'){
+    if (currentEffect === 'none') {
       resetEditingEffect();
 
       return;
     }
     customizeEffects(currentEffect);
-
   });
 };
-

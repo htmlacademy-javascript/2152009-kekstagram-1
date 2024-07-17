@@ -1,5 +1,5 @@
 import {
-  initBigPicture,
+  initializeBigPicture,
   initRenderingThumbnails,
 } from './rendering-big-picture.js';
 import {
@@ -7,9 +7,9 @@ import {
   setUserFormSubmit,
   closePictureUploadModal,
 } from './new-picture-form.js';
-import { initPictureFormValidation } from './picture-form-validation.js';
-import { initPictureEditingSize } from './picture-editing-size.js';
-import { initPictureEditEffect } from './picture-edit-effect.js';
+import { initializePictureFormValidation } from './picture-form-validation.js';
+import { initializePictureEditingSize } from './picture-editing-size.js';
+import { initializePictureEditEffect } from './picture-edit-effect.js';
 import { getData } from './api.js';
 import { showAlert } from './util.js';
 
@@ -21,8 +21,8 @@ getData()
 
 setUserFormSubmit(closePictureUploadModal);
 
-initBigPicture();
+initializeBigPicture();
 displayNewPictureForm();
-initPictureFormValidation();
-initPictureEditEffect();
-initPictureEditingSize();
+initializePictureFormValidation();
+initializePictureEditEffect();
+initializePictureEditingSize();
