@@ -9,12 +9,10 @@ const pictureDescription = document.querySelector('.text__description');
 const pictureUploadOverlay = document.querySelector('.img-upload__overlay');
 const pictureUploadForm = document.querySelector('.img-upload');
 const cancelPictureUploadButton = document.querySelector('#upload-cancel');
-const pictureUploardPreview = document
+const pictureUploadPreview = document
   .querySelector('.img-upload__preview')
   .querySelector('img');
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
-
-let onDocumentKeydown;
 
 export const closePictureUploadModal = () => {
   pictureUploadOverlay.classList.add('hidden');
@@ -30,7 +28,7 @@ export const closePictureUploadModal = () => {
   resetEditingSize();
   resetEditingEffect();
 };
-onDocumentKeydown = (evt) => {
+function onDocumentKeydown(evt) {
   const { activeElement } = document;
   if (
     isEscapeKey(evt) &&
@@ -40,22 +38,11 @@ onDocumentKeydown = (evt) => {
     closePictureUploadModal();
     evt.stopPropagation();
   }
-};
+}
 const openPictureUploadModal = () => {
   pictureUploadOverlay.classList.remove('hidden');
 
   document.querySelector('body').classList.add('modal-open');
-  onDocumentKeydown = (evt) => {
-    const { activeElement } = document;
-    if (
-      isEscapeKey(evt) &&
-      activeElement !== inputHashtag &&
-      activeElement !== pictureDescription
-    ) {
-      closePictureUploadModal();
-      evt.stopPropagation();
-    }
-  };
 
   document.addEventListener('keydown', onDocumentKeydown);
 };
@@ -66,7 +53,7 @@ export const displayNewPictureForm = () => {
     const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
     if (matches) {
-      pictureUploardPreview.src = URL.createObjectURL(file);
+      pictureUploadPreview.src = URL.createObjectURL(file);
     }
     openPictureUploadModal();
   });
@@ -90,10 +77,8 @@ export const setUserFormSubmit = (onSuccess) => {
     blockSubmitButton();
     sendData(new FormData(evt.target))
       .then(onSuccess)
-      .then(renderMessage('success'))
-      .catch((err) => {
-        renderMessage(err);
-      })
+      .then(()=>renderMessage('success'))
+      .catch((err) => renderMessage(err))
       .finally(unblockSubmitButton);
   });
 };

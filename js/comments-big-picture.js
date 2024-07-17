@@ -25,10 +25,9 @@ const renderComments = (comments) => {
 };
 
 
-const loadComments = () => {
+const handleLoadComments = () => {
   const remainingComments = allComments.length - renderedCommentsCount;
   const nextStep = Math.min(remainingComments, STEP);
-
   renderComments(
     allComments.slice(renderedCommentsCount, renderedCommentsCount + nextStep)
   );
@@ -36,13 +35,13 @@ const loadComments = () => {
   socialCommentCount.textContent = `${renderedCommentsCount} из ${allComments.length} комментариев`;
   if (renderedCommentsCount >= allComments.length) {
     commentsLoader.classList.add('hidden');
-    commentsLoader.removeEventListener('click', loadComments);
+    commentsLoader.removeEventListener('click', handleLoadComments);
   }
 
 };
 
 export const initComments = () => {
-  commentsLoader.addEventListener('click', loadComments);
+  commentsLoader.addEventListener('click', handleLoadComments);
 };
 
 export const refreshComments = (comments)=>{
@@ -50,5 +49,6 @@ export const refreshComments = (comments)=>{
   renderedCommentsCount = 0;
   socialComments.innerHTML = '';
   commentsLoader.classList.remove('hidden');
-  loadComments();
+  commentsLoader.removeEventListener('click', handleLoadComments);
+  handleLoadComments();
 };
