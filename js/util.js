@@ -5,7 +5,7 @@ const errorMessageTemplate = document
   .querySelector('#error')
   .content.querySelector('.error');
 const alertContainerError = document.querySelector('#alertContainerError').content.querySelector('.alertContainerError');
-const MessageFragment = document.createDocumentFragment();
+const messageFragment = document.createDocumentFragment();
 const alertContainerFragment = document.createDocumentFragment();
 const ALERT_SHOW_TIME = 5000;
 export const SubmitButtonText = {
@@ -30,8 +30,8 @@ export const renderMessage = (messageType) => {
       ? successMessageTemplate.cloneNode(true)
       : errorMessageTemplate.cloneNode(true);
 
-  MessageFragment.appendChild(elementMessage);
-  document.body.appendChild(MessageFragment);
+  messageFragment.appendChild(elementMessage);
+  document.body.appendChild(messageFragment);
 
   const cancelButton =
     elementMessage.querySelector('.success__button') ||
@@ -40,7 +40,7 @@ export const renderMessage = (messageType) => {
     if (document.body.contains(elementMessage)) {
       document.body.removeChild(elementMessage);
       document.removeEventListener('keydown', onKeydownRemoveMessage);
-      window.removeEventListener('click', onClickRemoveMessage);
+      window.removeEventListener('click', handleClickRemoveMessage);
     }
   };
 
@@ -50,16 +50,14 @@ export const renderMessage = (messageType) => {
     }
   }
 
-  function onClickRemoveMessage (evt) {
+  function handleClickRemoveMessage (evt) {
     if (!elementMessage.contains(evt.target)) {
       removeMessage();
     }
   }
-
-
   cancelButton?.addEventListener('click', removeMessage);
   document.addEventListener('keydown', onKeydownRemoveMessage);
-  window.addEventListener('click', onClickRemoveMessage);
+  window.addEventListener('click', handleClickRemoveMessage);
 };
 
 export const debounce = (callback, timeoutDelay) =>{

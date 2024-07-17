@@ -63,7 +63,7 @@ const MEASURE = {
   phobos:'px',
   heat:''
 };
-const customizationEffects = (effect)=>{
+const customizeEffects = (effect)=>{
   picture.classList.add(`effects__preview--${effect}`);
   effectLevelSlider.noUiSlider.updateOptions(EFFECT_LEVEL_OBJECT[effect]);
   effectLevelSlider.classList.remove('hidden');
@@ -108,7 +108,7 @@ export const initPictureEditEffect = () => {
 
       return;
     }
-    customizationEffects(currentEffect);
+    customizeEffects(currentEffect);
 
   });
 };

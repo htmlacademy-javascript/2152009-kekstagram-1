@@ -49,10 +49,10 @@ const applyRandomPictureFilter = (data) => {
 };
 const applyDiscussedPictureFilter = (data) => {
   clearPictures();
-  const sorted = [...data].sort(
+  const discussedPictures = [...data].sort(
     (picture1, picture2) => picture2.comments.length - picture1.comments.length
   );
-  renderPhotoUsers(sorted);
+  renderPhotoUsers(discussedPictures);
 };
 const applyDefaultPictureFilter = () => {
   clearPictures();
@@ -70,6 +70,10 @@ const applyRandomFilterDebounced = debounce(() => {
 const applyDiscussedFilterDebounced = debounce(() => {
   applyDiscussedPictureFilter(receivedPicturesData);
 }, RERENDER_DELAY);
+export const initPictures = (data) => {
+  receivedPicturesData = data;
+  applyDefaultPictureFilter();
+};
 defaultFilterButton.addEventListener('click', () => {
   setActiveFilter(defaultFilterButton);
   applyDefaultFilterDebounced();
@@ -82,7 +86,4 @@ discussedFilterButton.addEventListener('click', () => {
   setActiveFilter(discussedFilterButton);
   applyDiscussedFilterDebounced();
 });
-export const initPictures = (data) => {
-  receivedPicturesData = data;
-  applyDefaultPictureFilter();
-};
+

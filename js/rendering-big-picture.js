@@ -52,6 +52,7 @@ const openBigPictureModal = (eventClickPhoto) => {
 
     document.addEventListener('keydown', onDocumentKeydown);
   }
+  initComments();
 };
 
 export const initBigPicture = () => {
@@ -63,5 +64,4 @@ export const initBigPicture = () => {
     closeBigPictureModal();
   });
 
-  initComments();
 };
